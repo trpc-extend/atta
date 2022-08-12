@@ -236,7 +236,7 @@ func GetReportCodec(rpcName string) ReportCodec
 type TestReportCodec struct {
 }
 
-// TVAttaDecodeFunc 长视频业务自定义扩展字段解析
+// ReportDecode 业务自定义扩展字段解析
 func (t *TestReportCodec) ReportDecode(ctx context.Context, req, rsp interface{}) (interface{},
 	interface{}, []string) {
 	fieldList := make([]string, 3)
