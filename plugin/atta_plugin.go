@@ -1,4 +1,4 @@
-package atta
+package plugin
 
 import (
 	"math/rand"
