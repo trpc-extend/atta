@@ -29,18 +29,12 @@ const (
 	LetterIdxMax  = 63 / LetterIdxBits   // # of letter indices fitting in 63 bits
 )
 
-// Json 任意类型转换成json类型
-func Json(i interface{}) string {
-	b, _ := json.Marshal(i)
-	return string(b)
-}
-
 // RandomString inspired by
 // https://stackoverflow.com/questions/22892120/how-to-generate-a-random-string-of-a-fixed-length-in-go
 func RandomString(n int) []byte {
 	//src := rand.NewSource(time.Now().UnixNano())
 	b := make([]byte, n)
-	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	// A rand.Int63() generates 63 random bits, enough for letterIdxMax letters!
 	for i, cache, remain := n-1, rand.Int63(), LetterIdxMax; i >= 0; {
 		if remain == 0 {
 			cache, remain = rand.Int63(), LetterIdxMax
@@ -53,6 +47,12 @@ func RandomString(n int) []byte {
 		remain--
 	}
 	return b
+}
+
+// Json 任意类型转换成json类型
+func Json(i interface{}) string {
+	b, _ := json.Marshal(i)
+	return string(b)
 }
 
 // GetDecodeReportData 根据rpcName获取对应解码后的上报数据
@@ -131,6 +131,3 @@ func ContainerName(m codec.Msg) string {
 	}
 	return m.CalleeContainerName()
 }
-
-
-
