@@ -135,6 +135,8 @@ func ToString(v interface{}) (dst string) {
 		dst = s
 	case []byte:
 		dst = string(s)
+	case nil:
+		dst = ""
 	default:
 		dst = Json(v)
 	}

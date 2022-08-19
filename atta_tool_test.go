@@ -96,6 +96,7 @@ func TestToString(t *testing.T) {
 			{name: "TestStr2Int64 error: err", args: fmt.Errorf("mock exception"), want: "mock exception"},
 			{name: "TestStr2Int64 string: abc123", args: "abc123", want: "abc123"},
 			{name: "TestStr2Int64 []byte: abc456", args: []byte("abc456"), want: "abc456"},
+			{name: "TestStr2Int64 nil: nil", args: nil, want: ""},
 		}
 		for _, tt := range tests {
 			dst := ToString(tt.args)
