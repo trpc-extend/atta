@@ -100,6 +100,47 @@ func GetStatusAndRetCode(err error) (Status, string) {
 	return status, retCode
 }
 
+// ToString 将任意数据转换成字符串，对非基本类型通过json格式转换
+func ToString(v interface{}) (dst string) {
+	switch s := v.(type) {
+	case bool:
+		dst = strconv.FormatBool(s)
+	case float64:
+		dst = strconv.FormatFloat(s, 'f', -1, 64)
+	case float32:
+		dst = strconv.FormatFloat(float64(s), 'f', -1, 32)
+	case int:
+		dst = strconv.Itoa(s)
+	case int64:
+		dst = strconv.FormatInt(s, 10)
+	case int32:
+		dst = strconv.Itoa(int(s))
+	case int16:
+		dst = strconv.FormatInt(int64(s), 10)
+	case int8:
+		dst = strconv.FormatInt(int64(s), 10)
+	case uint:
+		dst = strconv.FormatInt(int64(s), 10)
+	case uint64:
+		dst = strconv.FormatInt(int64(s), 10)
+	case uint32:
+		dst = strconv.FormatInt(int64(s), 10)
+	case uint16:
+		dst =  strconv.FormatInt(int64(s), 10)
+	case uint8:
+		dst =  strconv.FormatInt(int64(s), 10)
+	case error:
+		dst =  s.Error()
+	case string:
+		dst = s
+	case []byte:
+		dst = string(s)
+	default:
+		dst = Json(v)
+	}
+	return dst
+}
+
 // PInterfaceName 获取被调接口名称
 func PInterfaceName(m codec.Msg) string {
 	if m.CalleeMethod() == "" {

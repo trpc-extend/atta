@@ -71,3 +71,36 @@ func TestGetStatusAndRetCode(t *testing.T) {
 		})
 	})
 }
+
+// TestToString 单测 ToString
+func TestToString(t *testing.T) {
+	convey.Convey("TestToString", t, func() {
+		tests := []struct {
+			name string
+			args interface{}
+			want string
+		}{
+			{name: "TestToString bool: true", args: true, want: "true"},
+			{name: "TestStr2Int64 float64: 3.1415", args: float64(3.1415), want: "3.1415"},
+			{name: "TestStr2Int64 float32: 3.14", args: float32(3.14), want: "3.14"},
+			{name: "TestStr2Int64 int: -1000", args: int(-1000), want: "-1000"},
+			{name: "TestStr2Int64 int64: 123456789012345", args: int64(123456789012345), want: "123456789012345"},
+			{name: "TestStr2Int64 int32: -123456789", args: int32(-123456789), want: "-123456789"},
+			{name: "TestStr2Int64 int16: 1234", args: int16(1234), want: "1234"},
+			{name: "TestStr2Int64 int8: 127", args: int8(127), want: "127"},
+			{name: "TestStr2Int64 uint: 1000", args: uint(1000), want: "1000"},
+			{name: "TestStr2Int64 uint64: 123456789012345", args: uint64(123456789012345), want: "123456789012345"},
+			{name: "TestStr2Int64 uint32: 123456789", args: uint32(123456789), want: "123456789"},
+			{name: "TestStr2Int64 uint16: 1234", args: uint16(1234), want: "1234"},
+			{name: "TestStr2Int64 uint8: 127", args: uint8(127), want: "127"},
+			{name: "TestStr2Int64 error: err", args: fmt.Errorf("mock exception"), want: "mock exception"},
+			{name: "TestStr2Int64 string: abc123", args: "abc123", want: "abc123"},
+			{name: "TestStr2Int64 []byte: abc456", args: []byte("abc456"), want: "abc456"},
+		}
+		for _, tt := range tests {
+			dst := ToString(tt.args)
+			fmt.Printf("TestToString args:%+v, dst:%s, want:%s \n", tt.args, dst, tt.want)
+			convey.So(dst, convey.ShouldEqual, tt.want)
+		}
+	})
+}

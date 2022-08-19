@@ -60,8 +60,8 @@ func (t *AttaReport) ReportServerFilter(ctx context.Context, req interface{}, ne
 	data.AModule = fmt.Sprintf("%s.%s.%s", msg.CallerApp(), msg.CallerServer(), msg.CallerService())
 	data.AInterface = msg.CallerMethod()
 	data.AHost = fmt.Sprintf("%s", RemoteAddr(msg))
-	data.ReqBody = Json(dReq)
-	data.RspBody = Json(dRsp)
+	data.ReqBody = ToString(dReq)
+	data.RspBody = ToString(dRsp)
 	data.ExtraField = string(trpc.GetMetaData(ctx, ExtraFieldKey))
 	data.Extend = extend
 	data.Time = strconv.FormatInt(time.Since(startTime).Milliseconds(), 10)
@@ -104,8 +104,8 @@ func (t *AttaReport) ReportClientFilter(ctx context.Context, req, rsp interface{
 	data.AModule = fmt.Sprintf("%s.%s.%s", msg.CallerApp(), msg.CallerServer(), msg.CallerService())
 	data.AInterface = msg.CallerMethod()
 	data.AHost = fmt.Sprintf("%s.%s", LocalAddr(msg), trpc.GlobalConfig().Global.ContainerName)
-	data.ReqBody = Json(dReq)
-	data.RspBody = Json(dRsp)
+	data.ReqBody = ToString(dReq)
+	data.RspBody = ToString(dRsp)
 	data.ExtraField = string(trpc.GetMetaData(ctx, ExtraFieldKey))
 	data.Extend = extend
 	data.Time = strconv.FormatInt(time.Since(startTime).Milliseconds(), 10)
