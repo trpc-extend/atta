@@ -4,10 +4,10 @@ import (
 	"math/rand"
 	"time"
 
-	"git.code.oa.com/trpc-go/trpc-go/filter"
-	"git.code.oa.com/trpc-go/trpc-go/log"
-	"git.code.oa.com/trpc-go/trpc-go/plugin"
-	"git.woa.com/trpc-extend/trpc-go/atta"
+	"github.com/trpc-extend/trpc-go/atta"
+	"trpc.group/trpc-go/trpc-go/filter"
+	"trpc.group/trpc-go/trpc-go/log"
+	"trpc.group/trpc-go/trpc-go/plugin"
 )
 
 const (

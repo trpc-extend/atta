@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"git.code.oa.com/trpc-go/trpc-go"
-	"git.code.oa.com/trpc-go/trpc-go/errs"
-	"git.code.oa.com/trpc-go/trpc-go/filter"
-	"git.code.oa.com/trpc-go/trpc-go/log"
+	"trpc.group/trpc-go/trpc-go"
+	"trpc.group/trpc-go/trpc-go/errs"
+	"trpc.group/trpc-go/trpc-go/filter"
+	"trpc.group/trpc-go/trpc-go/log"
 )
 
 // AttaServerFilter 作为主端被调函数接口拦截器

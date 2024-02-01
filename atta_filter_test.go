@@ -3,12 +3,10 @@ package atta
 import (
 	"context"
 	"testing"
+	"trpc.group/trpc-go/trpc-go"
 
 	"github.com/smartystreets/goconvey/convey"
-
-	"git.code.oa.com/atta/attaapi-go/v2"
-	"git.code.oa.com/goom/mocker"
-	"git.code.oa.com/trpc-go/trpc-go"
+	mocker "github.com/tencent/goom"
 )
 
 // CreateReq 创建群组请求
@@ -43,8 +41,8 @@ func TestReportServerFilter(t *testing.T) {
 			mocker := mocker.Create()
 			defer mocker.Reset()
 			RegisterDefault()
-			var attaObj attaapi.AttaApi
-			mocker.Struct(&attaObj).Method("SendFields").Return(attaapi.AttaReportCodeSuccess)
+			var attaObj interface{}
+			mocker.Struct(&attaObj).Method("SendFields").Return(0)
 			req := &CreateReq{Type: "1", GroupID: "66881234"}
 			rsp, err := GetDefaultReport().ReportServerFilter(trpc.BackgroundContext(), req, TrpcServerFilterFunc)
 			convey.So(err, convey.ShouldBeNil)
@@ -60,8 +58,8 @@ func TestReportClientFilter(t *testing.T) {
 			mocker := mocker.Create()
 			defer mocker.Reset()
 			RegisterDefault()
-			var attaObj attaapi.AttaApi
-			mocker.Struct(&attaObj).Method("SendFields").Return(attaapi.AttaReportCodeSuccess)
+			var attaObj interface{}
+			mocker.Struct(&attaObj).Method("SendFields").Return(0)
 			req := &CreateReq{Type: "1", GroupID: "66881234"}
 			rsp := &CreateRsp{ActionStatus: "1"}
 			err := GetDefaultReport().ReportClientFilter(trpc.BackgroundContext(), req, rsp, TrpcClientFilterFunc)

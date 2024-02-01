@@ -7,10 +7,11 @@ import (
 	"math/rand"
 	"strconv"
 
-	"git.code.oa.com/trpc-go/trpc-go"
-	"git.code.oa.com/trpc-go/trpc-go/codec"
-	"git.code.oa.com/trpc-go/trpc-go/errs"
-	attaCodec "git.woa.com/trpc-extend/trpc-go/atta/codec"
+	attaCodec "github.com/trpc-extend/trpc-go/atta/codec"
+
+	"trpc.group/trpc-go/trpc-go"
+	"trpc.group/trpc-go/trpc-go/codec"
+	"trpc.group/trpc-go/trpc-go/errs"
 )
 
 // Status 指007系统使用的Status
@@ -126,11 +127,11 @@ func ToString(v interface{}) (dst string) {
 	case uint32:
 		dst = strconv.FormatInt(int64(s), 10)
 	case uint16:
-		dst =  strconv.FormatInt(int64(s), 10)
+		dst = strconv.FormatInt(int64(s), 10)
 	case uint8:
-		dst =  strconv.FormatInt(int64(s), 10)
+		dst = strconv.FormatInt(int64(s), 10)
 	case error:
-		dst =  s.Error()
+		dst = s.Error()
 	case string:
 		dst = s
 	case []byte:

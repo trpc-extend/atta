@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/smartystreets/goconvey/convey"
+	mocker "github.com/tencent/goom"
+	"github.com/trpc-extend/trpc-go/atta/codec"
 
-	"git.code.oa.com/goom/mocker"
-	"git.code.oa.com/trpc-go/trpc-go"
-	"git.code.oa.com/trpc-go/trpc-go/errs"
-	"git.woa.com/trpc-extend/trpc-go/atta/codec"
+	"trpc.group/trpc-go/trpc-go"
+	"trpc.group/trpc-go/trpc-go/errs"
 )
 
 // TestRandomString 单测RandomString

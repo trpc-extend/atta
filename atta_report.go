@@ -4,24 +4,23 @@ import (
 	"context"
 	"fmt"
 	"sync"
+	"trpc.group/trpc-go/trpc-go"
 
-	"git.code.oa.com/atta/attaapi-go/v2"
-	"git.code.oa.com/trpc-go/trpc-go"
-	"git.code.oa.com/trpc-go/trpc-go/codec"
-	"git.code.oa.com/trpc-go/trpc-go/log"
-	"git.code.oa.com/trpc-go/trpc-go/metrics"
-	attaCodec "git.woa.com/trpc-extend/trpc-go/atta/codec"
+	attaCodec "github.com/trpc-extend/trpc-go/atta/codec"
+
+	"trpc.group/trpc-go/trpc-go/codec"
+	"trpc.group/trpc-go/trpc-go/log"
 )
 
 // AttaReport atta上报实例对象
 type AttaReport struct {
-	attaID        string          `yaml:"atta_id"`     // atta ID
-	attaToken     string          `yaml:"atta_token"`  // atta token值
-	retryTime     int             `yaml:"retry_time"`  // 上报atta失败重试次数
-	autoEscape    bool            `yaml:"auto_escape"` // 是否打开自动转义
+	attaID     string `yaml:"atta_id"`     // atta ID
+	attaToken  string `yaml:"atta_token"`  // atta token值
+	retryTime  int    `yaml:"retry_time"`  // 上报atta失败重试次数
+	autoEscape bool   `yaml:"auto_escape"` // 是否打开自动转义
 
-	attaObj       attaapi.AttaApi // atta上报实例
-	reportMsgPool *sync.Pool      // 申请上报消息的消息池
+	// attaObj       attaapi.AttaApi // atta上报实例
+	reportMsgPool *sync.Pool // 申请上报消息的消息池
 }
 
 // createAttaReport 创建AttaReport
@@ -40,13 +39,16 @@ func createAttaReport(name string, opts ...Option) *AttaReport {
 		reportMsgPool: &sync.Pool{New: func() interface{} { return &ReportMsg{} }},
 	}
 	for i := 0; i < attaReport.retryTime; i++ {
-		if initResult := attaReport.attaObj.InitUDP(); initResult != attaapi.AttaReportCodeSuccess {
-			metrics.Counter("atta_init_udp_fail").Incr()
-			log.Errorf("attaObj.InitUDP failed,initResult:%d,at retry time:%d", initResult, i)
-		} else {
-			log.Infof("attaObj.InitUDP succ")
-			break
-		}
+		/*
+			if initResult := attaReport.attaObj.InitUDP(); initResult != attaapi.AttaReportCodeSuccess {
+				metrics.Counter("atta_init_udp_fail").Incr()
+				log.Errorf("attaObj.InitUDP failed,initResult:%d,at retry time:%d", initResult, i)
+			} else {
+				log.Infof("attaObj.InitUDP succ")
+				break
+			}
+
+		*/
 	}
 	return attaReport
 }
@@ -93,28 +95,34 @@ func (t *AttaReport) ReportMsgToAtta(ctx context.Context, data *ReportMsg) {
 
 // ReportFields 封装对fieldValues数组消息的上报逻辑
 func (t *AttaReport) ReportFields(fieldValues []string) {
-	for i := 0; i < t.retryTime; i++ {
-		ret := t.attaObj.SendFields(t.attaID, t.attaToken, fieldValues, t.autoEscape)
-		if ret != attaapi.AttaReportCodeSuccess {
-			metrics.Counter("atta_send_fields_fail").Incr()
-			log.Errorf("SendFields failed! ret:%d, attaID:%s, fieldValues:%#v", ret, t.attaID, fieldValues)
-		} else {
-			log.Debugf("SendFields succ! attaID:%s, fieldValues:%#v", t.attaID, fieldValues)
-			break
+	/*
+		for i := 0; i < t.retryTime; i++ {
+			ret := t.attaObj.SendFields(t.attaID, t.attaToken, fieldValues, t.autoEscape)
+			if ret != attaapi.AttaReportCodeSuccess {
+				metrics.Counter("atta_send_fields_fail").Incr()
+				log.Errorf("SendFields failed! ret:%d, attaID:%s, fieldValues:%#v", ret, t.attaID, fieldValues)
+			} else {
+				log.Debugf("SendFields succ! attaID:%s, fieldValues:%#v", t.attaID, fieldValues)
+				break
+			}
 		}
-	}
+	*/
+	log.Debugf("SendFields succ! attaID:%s, fieldValues:%#v", t.attaID, fieldValues)
 }
 
 // ReportString 封装对字符串分割消息的上报，需要自己按照规定分隔符组装数据
 func (t *AttaReport) ReportString(value string) {
-	for i := 0; i < t.retryTime; i++ {
-		ret := t.attaObj.SendString(t.attaID, t.attaToken, value)
-		if ret != attaapi.AttaReportCodeSuccess {
-			metrics.Counter("atta_send_string_fail").Incr()
-			log.Errorf("SendString failed! ret:%d, attaID:%s, value:%s", ret, t.attaID, value)
-		} else {
-			log.Debugf("SendString succ! attaID:%s, value:%s", t.attaID, value)
-			break
+	/*
+		for i := 0; i < t.retryTime; i++ {
+			ret := t.attaObj.SendString(t.attaID, t.attaToken, value)
+			if ret != attaapi.AttaReportCodeSuccess {
+				metrics.Counter("atta_send_string_fail").Incr()
+				log.Errorf("SendString failed! ret:%d, attaID:%s, value:%s", ret, t.attaID, value)
+			} else {
+				log.Debugf("SendString succ! attaID:%s, value:%s", t.attaID, value)
+				break
+			}
 		}
-	}
+	*/
+	log.Debugf("SendString succ! attaID:%s, value:%s", t.attaID, value)
 }

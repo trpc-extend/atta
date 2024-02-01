@@ -27,7 +27,7 @@
 被动上报是通过注册trpc插件实现的，因此分两个步骤：  
 - 首先在main函数地方引入插件包
 ```
-  import _ "git.woa.com/trpc-extend/trpc-go/atta/plugin"
+  import _ "github.com/trpc-extend/trpc-go/atta/plugin"
 ```
 
 - 其次增加trpc-go框架配置：
@@ -54,7 +54,7 @@ plugins:
 主动上报是使用者在程序代码中进行主动调用上报，主要依赖组件提供的API调用。
 - 首先在调用地方引入插件包
 ```
-  import "git.woa.com/trpc-extend/trpc-go/atta"
+  import "github.com/trpc-extend/trpc-go/atta"
 ```
 - 在程序起始地方，注册对应的上报实例，支持多实例注册，以下选择其一即可：
 ```

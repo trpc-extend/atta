@@ -4,8 +4,7 @@ import (
 	"testing"
 
 	"github.com/smartystreets/goconvey/convey"
-
-	"git.code.oa.com/goom/mocker"
+	mocker "github.com/tencent/goom"
 )
 
 // TestReportMsgToList 单测ReportMsgToList

@@ -4,10 +4,9 @@ import (
 	"testing"
 
 	"github.com/smartystreets/goconvey/convey"
+	mocker "github.com/tencent/goom"
 
-	"git.code.oa.com/atta/attaapi-go/v2"
-	"git.code.oa.com/goom/mocker"
-	"git.code.oa.com/trpc-go/trpc-go"
+	"trpc.group/trpc-go/trpc-go"
 )
 
 // TestReportMsgToAtta 单测ReportMsgToAtta
@@ -17,8 +16,8 @@ func TestReportMsgToAtta(t *testing.T) {
 			mocker := mocker.Create()
 			defer mocker.Reset()
 			RegisterDefault()
-			var attaObj attaapi.AttaApi
-			mocker.Struct(&attaObj).Method("SendFields").Return(attaapi.AttaReportCodeSuccess)
+			var attaObj interface{}
+			mocker.Struct(&attaObj).Method("SendFields").Return(0)
 			dataReport := &ReportMsg{
 				ReqBody: "testReqBody",
 				RspBody: "testRspBody",

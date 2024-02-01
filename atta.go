@@ -6,8 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"git.code.oa.com/trpc-go/trpc-go"
-	"git.code.oa.com/atta/attaapi-go/v2"
+	"trpc.group/trpc-go/trpc-go"
 )
 
 func init() {
@@ -51,6 +50,7 @@ func GetReport(name string) *AttaReport {
 	return nil
 }
 
+/*
 // GetDefaultAttaApiObj 获取默认的AttaApi对象, 如果没有返回nil
 func GetDefaultAttaApiObj() *attaapi.AttaApi {
 	if defaultReport != nil {
@@ -68,6 +68,8 @@ func GetAttaApiObj(name string) *attaapi.AttaApi {
 	}
 	return nil
 }
+
+*/
 
 // ReportMsgToAtta 上报ReportMsg数据到atta
 func ReportMsgToAtta(ctx context.Context, data *ReportMsg) {
@@ -137,5 +139,3 @@ func AppendExtraValueSep(ctx context.Context, value string, sep string) {
 		trpc.SetMetaData(ctx, ExtraFieldKey, []byte(ov+sep+value))
 	}
 }
-
-
