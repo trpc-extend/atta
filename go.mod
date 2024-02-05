@@ -1,4 +1,4 @@
-module github.com/trpc-extend/trpc-go/atta
+module github.com/trpc-extend/atta
 
 go 1.18
 

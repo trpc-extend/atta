@@ -4,10 +4,9 @@ import (
 	"context"
 	"fmt"
 	"sync"
+
+	attaCodec "github.com/trpc-extend/atta/codec"
 	"trpc.group/trpc-go/trpc-go"
-
-	attaCodec "github.com/trpc-extend/trpc-go/atta/codec"
-
 	"trpc.group/trpc-go/trpc-go/codec"
 	"trpc.group/trpc-go/trpc-go/log"
 )

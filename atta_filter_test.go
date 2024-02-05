@@ -3,10 +3,11 @@ package atta
 import (
 	"context"
 	"testing"
-	"trpc.group/trpc-go/trpc-go"
 
 	"github.com/smartystreets/goconvey/convey"
+
 	mocker "github.com/tencent/goom"
+	"trpc.group/trpc-go/trpc-go"
 )
 
 // CreateReq 创建群组请求

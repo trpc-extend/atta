@@ -7,7 +7,7 @@ import (
 
 	"github.com/smartystreets/goconvey/convey"
 	mocker "github.com/tencent/goom"
-	"github.com/trpc-extend/trpc-go/atta/codec"
+	"github.com/trpc-extend/atta/codec"
 
 	"trpc.group/trpc-go/trpc-go"
 	"trpc.group/trpc-go/trpc-go/errs"

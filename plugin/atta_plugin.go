@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/trpc-extend/trpc-go/atta"
+	"github.com/trpc-extend/atta"
 	"trpc.group/trpc-go/trpc-go/filter"
 	"trpc.group/trpc-go/trpc-go/log"
 	"trpc.group/trpc-go/trpc-go/plugin"

@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"strconv"
 
-	attaCodec "github.com/trpc-extend/trpc-go/atta/codec"
+	attaCodec "github.com/trpc-extend/atta/codec"
 
 	"trpc.group/trpc-go/trpc-go"
 	"trpc.group/trpc-go/trpc-go/codec"
@@ -33,7 +33,7 @@ const (
 // RandomString inspired by
 // https://stackoverflow.com/questions/22892120/how-to-generate-a-random-string-of-a-fixed-length-in-go
 func RandomString(n int) []byte {
-	//src := rand.NewSource(time.Now().UnixNano())
+	// src := rand.NewSource(time.Now().UnixNano())
 	b := make([]byte, n)
 	// A rand.Int63() generates 63 random bits, enough for letterIdxMax letters!
 	for i, cache, remain := n-1, rand.Int63(), LetterIdxMax; i >= 0; {
@@ -80,9 +80,9 @@ func GetStatusAndRetCode(err error) (Status, string) {
 		e, ok := err.(*errs.Error)
 		if ok {
 			if e.Code == errs.RetClientTimeout && e.Type == errs.ErrorTypeFramework {
-				status = StatusTimeout //超时
+				status = StatusTimeout // 超时
 			} else {
-				status = StatusException //异常
+				status = StatusException // 异常
 			}
 			if e.Desc != "" {
 				retCode = fmt.Sprintf("%s_%d", e.Desc, e.Code)
@@ -91,7 +91,7 @@ func GetStatusAndRetCode(err error) (Status, string) {
 			}
 		} else {
 			// 兼容 业务没有使用框架error,上报固定错误值
-			status = StatusException //异常
+			status = StatusException // 异常
 			retCode = "007_999"
 		}
 	} else {
